@@ -5,9 +5,11 @@ import json, pathlib
 AQUI = pathlib.Path(__file__).parent
 dados = json.loads((AQUI.parent.parent / "02 ORGANIZADO" / "cardapio.json").read_text())
 dados.pop("_nota", None)
+dados.get("contato", {}).pop("_fonte", None)
 for c in dados["categorias"]:
     for i in c["itens"]:
         i.pop("confirmar", None)   # marcação interna, não vai para o site
+        i.pop("preco", None)       # desde 10/11/2026 o cardápio não mostra preço (pedido da Pamela)
 html = (AQUI / "template.html").read_text().replace("/*DADOS*/null", json.dumps(dados, ensure_ascii=False))
 (AQUI / "index.html").write_text(html)
 print("index.html ok,", sum(len(c["itens"]) for c in dados["categorias"]), "itens")

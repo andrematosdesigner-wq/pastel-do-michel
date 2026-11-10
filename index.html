@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Pastel do Michel · Cardápio</title>
-<meta name="description" content="Cardápio do Pastel do Michel: pastéis, salgados, assados, lanches no pão francês, sucos e bebidas.">
+<title>Michel do Pastel · Cardápio</title>
+<meta name="description" content="Cardápio do Michel do Pastel: pastéis, salgados, assados, lanches no pão francês, sucos e bebidas.">
 <meta name="theme-color" content="#9E2A1F">
-<meta property="og:title" content="Pastel do Michel · Cardápio">
+<meta property="og:title" content="Michel do Pastel · Cardápio">
 <meta property="og:image" content="fotos/capa.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,6 +32,7 @@ img{display:block;max-width:100%}
 .selo b{font-family:"Lilita One";font-weight:400;font-size:30px;line-height:.9;color:#fff;
   -webkit-text-stroke:5px var(--vermelho-esc);paint-order:stroke fill}
 .selo b + b{font-size:40px;color:var(--vermelho);-webkit-text-stroke:0;letter-spacing:.02em}
+.logo{position:relative;width:200px;height:auto;margin:0 auto;filter:drop-shadow(0 8px 0 rgba(0,0,0,.15))}
 .topo p{position:relative;margin-top:14px;font-family:"Barlow Condensed";font-weight:600;font-size:18px;letter-spacing:.06em;text-transform:uppercase;opacity:.95}
 
 /* navegação */
@@ -92,33 +93,34 @@ section h2::after{content:"";flex:1;height:3px;border-radius:3px;background:line
 .folha h3{font-family:"Lilita One";font-weight:400;font-size:32px;line-height:1;color:var(--vermelho);margin-top:2px}
 .folha p{color:var(--suave);margin-top:6px}
 .folha .linha{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px 18px}
-.folha .preco{font-size:28px;padding:4px 14px}
+.folha .obs{font-family:"Barlow Condensed";font-weight:600;font-size:17px;color:var(--suave);text-transform:uppercase;letter-spacing:.04em}
 .btn{appearance:none;border:0;cursor:pointer;font-family:"Barlow Condensed";font-weight:700;font-size:18px;letter-spacing:.03em;
   text-transform:uppercase;background:var(--vermelho);color:#fff;border-radius:12px;padding:12px 16px}
 
 footer{text-align:center;color:var(--suave);font-size:14px;padding:10px 16px 40px}
-footer b{font-family:"Lilita One";font-weight:400;color:var(--vermelho);font-size:20px;display:block}
+footer b{font-family:"Lilita One";font-weight:400;color:var(--vermelho);font-size:20px;display:block;margin-bottom:6px}
+footer .zap{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:12px 0}
+footer .zap a{display:inline-flex;align-items:center;gap:6px;padding:10px 14px;border-radius:999px;background:#1F8F4E;color:#fff;
+  text-decoration:none;font-family:"Barlow Condensed";font-weight:700;font-size:17px;letter-spacing:.02em}
+footer .zap svg{width:18px;height:18px;fill:#fff}
 </style>
 </head>
 <body>
 <header class="topo">
-  <div class="selo"><b>Pastel do</b><b>MICHEL</b></div>
+  <img class="logo" src="fotos/logo.png" alt="Michel do Pastel" width="640" height="603">
   <p>Cardápio</p>
 </header>
 <nav><ul id="nav"></ul></nav>
 <main id="app"></main>
-<footer><b>Pastel do Michel</b>Preços sujeitos a alteração. Peça no balcão.</footer>
+<footer id="rodape"></footer>
 
 <div class="foco" id="foco" role="dialog" aria-modal="true">
   <div class="folha" id="folha"></div>
 </div>
 
 <script>
-const DADOS = {"nome": "Pastel do Michel", "url": "https://andrematosdesigner-wq.github.io/pastel-do-michel/", "categorias": [{"id": "pasteis", "nome": "Pastéis", "itens": [{"id": "massa", "nome": "Massa", "preco": 8}, {"id": "carne", "nome": "Carne", "preco": 9, "foto": "carne.jpg"}, {"id": "queijo", "nome": "Queijo", "preco": 9}, {"id": "carne-queijo", "nome": "Carne c/ queijo", "preco": 15}, {"id": "carne-ovo", "nome": "Carne c/ ovo", "preco": 10, "foto": "carne-ovo.jpg"}, {"id": "frango-catupiry", "nome": "Frango c/ catupiry", "preco": 10}, {"id": "pizza", "nome": "Pizza", "desc": "Presunto, queijo, milho e orégano", "preco": 10, "foto": "pizza.jpg"}, {"id": "carne-milho-azeitona", "nome": "Carne, milho e azeitona", "preco": 14}, {"id": "frango-cheddar", "nome": "Frango c/ cheddar", "preco": 12, "foto": "frango-cheddar.jpg"}, {"id": "carne-cheddar-bacon", "nome": "Carne, cheddar e bacon", "desc": "A carne pode ser trocada por frango", "preco": 16}, {"id": "vegetariano", "nome": "Vegetariano", "desc": "Palmito, tomate, cebola e cebolinha", "preco": 20}, {"id": "goiano", "nome": "Goiano", "desc": "Presunto, queijo, orégano, tomate, milho, cebola e calabresa", "preco": 20}, {"id": "calabacon", "nome": "Calabacon", "desc": "Calabresa, bacon e cheddar", "preco": 20}, {"id": "hamburgao", "nome": "Hambúrgão", "desc": "Hambúrguer, presunto, queijo, tomate, milho e cheddar", "preco": 20, "foto": "hamburgao.jpg", "destaque": true}, {"id": "misturinha", "nome": "Misturinha", "desc": "Carne, ovo, queijo, presunto, milho, frango, calabresa, catupiry e cheddar", "preco": 30, "foto": "misturinha.jpg", "destaque": true}]}, {"id": "doces", "nome": "Pastéis doces", "itens": [{"id": "chocolate", "nome": "Chocolate", "preco": 12}, {"id": "chocolate-branco", "nome": "Chocolate branco", "preco": 12}, {"id": "romeu-julieta", "nome": "Romeu e Julieta", "desc": "Goiabada e queijo", "preco": 14}, {"id": "banana-canela", "nome": "Banana c/ canela", "desc": "Banana, canela e chocolate branco", "preco": 14}, {"id": "prestigio", "nome": "Prestígio", "desc": "Chocolate e coco ralado", "preco": 14}, {"id": "duo", "nome": "Duo", "desc": "Chocolate preto e branco", "preco": 14}]}, {"id": "acrescimos", "nome": "Acréscimos", "itens": [{"id": "add-ovo", "nome": "Ovo", "preco": 2}, {"id": "add-queijo", "nome": "Queijo", "preco": 5}, {"id": "add-bacon", "nome": "Bacon", "preco": 5}, {"id": "add-calabresa", "nome": "Calabresa", "preco": 5}, {"id": "add-azeitona-milho", "nome": "Azeitona ou milho", "preco": 3}, {"id": "add-carne-frango", "nome": "Carne ou frango", "preco": 5}, {"id": "add-catupiry-cheddar", "nome": "Catupiry ou cheddar", "preco": 5}]}, {"id": "fritos", "nome": "Salgados fritos", "itens": [{"id": "risole", "nome": "Risole", "desc": "Presunto e queijo, carne ou frango c/ catupiry", "preco": 8}, {"id": "espeto", "nome": "Espeto", "desc": "Frango, pimentão, tomate e cebola", "preco": 12}, {"id": "coxinha", "nome": "Coxinha", "desc": "Massa de mandioca (frango ou carne)", "preco": 8}, {"id": "salsicha", "nome": "Salsicha", "preco": 8}, {"id": "bolinho-carne", "nome": "Bolinho de carne", "desc": "Carne muito bem selecionada com temperos", "preco": 12, "foto": "bolinho-carne.jpg", "destaque": true}, {"id": "coxinha-costela", "nome": "Coxinha de costela", "preco": 9}]}, {"id": "assados", "nome": "Assados", "itens": [{"id": "assado-frango", "nome": "Frango c/ catupiry", "preco": 11}, {"id": "doguinho", "nome": "Doguinho", "preco": 11}, {"id": "assado-pizza", "nome": "Pizza", "preco": 11}, {"id": "assado-carne", "nome": "Carne", "preco": 11}, {"id": "assado-hamburguer", "nome": "Hambúrguer", "preco": 11}, {"id": "carne-panela", "nome": "Carne de panela", "preco": 11}, {"id": "calabresa-cheddar", "nome": "Calabresa c/ cheddar", "preco": 11}]}, {"id": "paes", "nome": "Pão francês", "itens": [{"id": "pao-manteiga", "nome": "Pão na chapa c/ manteiga", "preco": 4}, {"id": "pao-ovo", "nome": "Pão c/ ovo", "preco": 10}, {"id": "misto", "nome": "Misto quente", "desc": "Pão francês, presunto e queijo", "preco": 10}, {"id": "bauru", "nome": "Bauru", "desc": "Pão francês, presunto, queijo e tomate", "preco": 12}, {"id": "buraco-quente", "nome": "Buraco quente", "desc": "Pão francês c/ carne moída", "preco": 12}, {"id": "pao-mortadela", "nome": "Pão c/ mortadela", "desc": "Pão francês c/ mortadela e queijo", "preco": null}, {"id": "pao-linguica", "nome": "Pão c/ linguiça", "desc": "Pão francês, linguiça caseira, ovo, queijo, vinagrete e cebola roxa", "preco": null}]}, {"id": "sucos", "nome": "Sucos", "itens": [{"id": "suco-300", "nome": "Natural · copo 300 ml", "preco": null}, {"id": "suco-500", "nome": "Natural · copo 500 ml", "preco": null}, {"id": "suco-1200", "nome": "Natural · jarra 1,2 L", "desc": "Natural ou polpa", "preco": null}, {"id": "suco-1800", "nome": "Natural · jarra 1,8 L", "desc": "Natural ou polpa", "preco": null}, {"id": "leite-300", "nome": "Com leite · copo 300 ml", "preco": 12}, {"id": "leite-500", "nome": "Com leite · copo 500 ml", "preco": 14}, {"id": "leite-1200", "nome": "Com leite · jarra 1,2 L", "desc": "Natural ou polpa", "preco": 27}, {"id": "leite-1800", "nome": "Com leite · jarra 1,8 L", "desc": "Natural ou polpa", "preco": 31}]}, {"id": "bebidas", "nome": "Bebidas", "itens": [{"id": "refri-lata", "nome": "Refrigerante lata", "preco": 6}, {"id": "refri-600", "nome": "Refrigerante 600 ml", "preco": 10}, {"id": "refri-1l", "nome": "Refrigerante 1 L", "preco": 11}, {"id": "coca-2l", "nome": "Coca-Cola 2 L", "preco": 17}, {"id": "achocolatado", "nome": "Achocolatado", "desc": "Copo, quente ou gelado", "preco": 8}, {"id": "sodinha", "nome": "Sodinha", "preco": 4}, {"id": "suco-garrafinha", "nome": "Suco garrafinha 450 ml", "preco": 6}, {"id": "tubaina", "nome": "Tubaína", "preco": 6}, {"id": "cafe", "nome": "Café", "preco": 4}, {"id": "cafe-leite", "nome": "Café c/ leite", "preco": 5}]}]};
+const DADOS = {"nome": "Pastel do Michel", "url": "https://andrematosdesigner-wq.github.io/pastel-do-michel/", "categorias": [{"id": "pasteis", "nome": "Pastéis", "itens": [{"id": "massa", "nome": "Massa"}, {"id": "carne", "nome": "Carne", "foto": "carne.jpg"}, {"id": "queijo", "nome": "Queijo"}, {"id": "carne-queijo", "nome": "Carne c/ queijo"}, {"id": "carne-ovo", "nome": "Carne c/ ovo", "foto": "carne-ovo.jpg"}, {"id": "frango-catupiry", "nome": "Frango c/ catupiry"}, {"id": "pizza", "nome": "Pizza", "desc": "Presunto, queijo, milho e orégano", "foto": "pizza.jpg"}, {"id": "carne-milho-azeitona", "nome": "Carne, milho e azeitona"}, {"id": "frango-cheddar", "nome": "Frango c/ cheddar", "foto": "frango-cheddar.jpg"}, {"id": "carne-cheddar-bacon", "nome": "Carne, cheddar e bacon", "desc": "A carne pode ser trocada por frango"}, {"id": "vegetariano", "nome": "Vegetariano", "desc": "Palmito, tomate, cebola e cebolinha"}, {"id": "goiano", "nome": "Goiano", "desc": "Presunto, queijo, orégano, tomate, milho, cebola e calabresa"}, {"id": "calabacon", "nome": "Calabacon", "desc": "Calabresa, bacon e cheddar"}, {"id": "hamburgao", "nome": "Hambúrgão", "desc": "Hambúrguer, presunto, queijo, tomate, milho e cheddar", "foto": "hamburgao.jpg", "destaque": true}, {"id": "misturinha", "nome": "Misturinha", "desc": "Carne, ovo, queijo, presunto, milho, frango, calabresa, catupiry e cheddar", "foto": "misturinha.jpg", "destaque": true}]}, {"id": "doces", "nome": "Pastéis doces", "itens": [{"id": "chocolate", "nome": "Chocolate"}, {"id": "chocolate-branco", "nome": "Chocolate branco"}, {"id": "romeu-julieta", "nome": "Romeu e Julieta", "desc": "Goiabada e queijo"}, {"id": "banana-canela", "nome": "Banana c/ canela", "desc": "Banana, canela e chocolate branco"}, {"id": "prestigio", "nome": "Prestígio", "desc": "Chocolate e coco ralado"}, {"id": "duo", "nome": "Duo", "desc": "Chocolate preto e branco"}]}, {"id": "acrescimos", "nome": "Acréscimos", "itens": [{"id": "add-ovo", "nome": "Ovo"}, {"id": "add-queijo", "nome": "Queijo"}, {"id": "add-bacon", "nome": "Bacon"}, {"id": "add-calabresa", "nome": "Calabresa"}, {"id": "add-azeitona-milho", "nome": "Azeitona ou milho"}, {"id": "add-carne-frango", "nome": "Carne ou frango"}, {"id": "add-catupiry-cheddar", "nome": "Catupiry ou cheddar"}]}, {"id": "fritos", "nome": "Salgados fritos", "itens": [{"id": "risole", "nome": "Risole", "desc": "Presunto e queijo, carne ou frango c/ catupiry"}, {"id": "espeto", "nome": "Espeto", "desc": "Frango, pimentão, tomate e cebola"}, {"id": "coxinha", "nome": "Coxinha", "desc": "Massa de mandioca (frango ou carne)"}, {"id": "salsicha", "nome": "Salsicha"}, {"id": "bolinho-carne", "nome": "Bolinho de carne", "desc": "Carne muito bem selecionada com temperos", "foto": "bolinho-carne.jpg", "destaque": true}, {"id": "coxinha-costela", "nome": "Coxinha de costela"}]}, {"id": "assados", "nome": "Assados", "itens": [{"id": "assado-frango", "nome": "Frango c/ catupiry"}, {"id": "doguinho", "nome": "Doguinho"}, {"id": "assado-pizza", "nome": "Pizza"}, {"id": "assado-carne", "nome": "Carne"}, {"id": "assado-hamburguer", "nome": "Hambúrguer"}, {"id": "carne-panela", "nome": "Carne de panela"}, {"id": "calabresa-cheddar", "nome": "Calabresa c/ cheddar"}]}, {"id": "paes", "nome": "Pão francês", "itens": [{"id": "pao-manteiga", "nome": "Pão na chapa c/ manteiga"}, {"id": "pao-ovo", "nome": "Pão c/ ovo"}, {"id": "misto", "nome": "Misto quente", "desc": "Pão francês, presunto e queijo"}, {"id": "bauru", "nome": "Bauru", "desc": "Pão francês, presunto, queijo e tomate"}, {"id": "buraco-quente", "nome": "Buraco quente", "desc": "Pão francês c/ carne moída"}]}, {"id": "sucos", "nome": "Sucos", "itens": [{"id": "suco-natural", "nome": "Suco natural", "desc": "Natural ou polpa · copo 300 ml ou 500 ml · jarra 1,2 L ou 1,8 L"}, {"id": "suco-leite", "nome": "Suco com leite", "desc": "Natural ou polpa · copo 300 ml ou 500 ml · jarra 1,2 L ou 1,8 L"}]}, {"id": "bebidas", "nome": "Bebidas", "itens": [{"id": "refri-lata", "nome": "Refrigerante lata"}, {"id": "refri-600", "nome": "Refrigerante 600 ml"}, {"id": "refri-1l", "nome": "Refrigerante 1 L"}, {"id": "coca-2l", "nome": "Coca-Cola 2 L"}, {"id": "achocolatado", "nome": "Achocolatado", "desc": "Copo, quente ou gelado"}, {"id": "sodinha", "nome": "Sodinha"}, {"id": "suco-garrafinha", "nome": "Suco garrafinha 450 ml"}, {"id": "tubaina", "nome": "Tubaína"}, {"id": "cafe", "nome": "Café"}, {"id": "cafe-leite", "nome": "Café c/ leite"}]}], "contato": {"whatsapp": ["(44) 99948-4827", "(44) 99752-7877"], "endereco": "Rua Harrison José Borges, 1202 · Centro"}};
 const $ = s => document.querySelector(s);
-const brl = v => v == null ? null : v.toFixed(2).replace(".", ",");
-const preco = v => v == null ? '<span class="preco consultar">Consultar</span>'
-  : `<span class="preco"><small>R$</small>${brl(v)}</span>`;
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const porId = {};
 
@@ -132,24 +134,27 @@ function montar(){
       if (i.destaque) dest.push(i);
       return `<li class="item" id="${i.id}">
         ${i.foto ? `<div class="mini"><img loading="lazy" src="fotos/${i.foto}" alt=""></div>` : ""}
-        <div class="nm"><h3>${esc(i.nome)}</h3>${i.desc ? `<p>${esc(i.desc)}</p>` : ""}</div>
-        ${preco(i.preco)}</li>`;
+        <div class="nm"><h3>${esc(i.nome)}</h3>${i.desc ? `<p>${esc(i.desc)}</p>` : ""}</div></li>`;
     }).join("");
     html.push(`<section id="${c.id}"><h2>${esc(c.nome)}</h2><ul class="lista">${itens}</ul></section>`);
   }
   const cards = dest.map(i => `<a class="card" href="#${i.id}" data-abre="${i.id}">
       <div class="ft"><img src="fotos/${i.foto}" alt="${esc(i.nome)}"></div>
-      <div class="tx"><div><h3>${esc(i.nome)}</h3>${i.desc ? `<span class="ds">${esc(i.desc)}</span>` : ""}</div>${preco(i.preco)}</div></a>`).join("");
+      <div class="tx"><div><h3>${esc(i.nome)}</h3>${i.desc ? `<span class="ds">${esc(i.desc)}</span>` : ""}</div></div></a>`).join("");
   $("#nav").innerHTML = nav.join("");
   $("#app").innerHTML = `<div class="destaques">${cards}</div>` + html.join("");
+  const k = DADOS.contato || {}, zap = n => "https://wa.me/55" + n.replace(/\D/g, "");
+  const ico = '<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>';
+  $("#rodape").innerHTML = `<b>Michel do Pastel</b>Peça no balcão ou chame no WhatsApp
+    <div class="zap">${(k.whatsapp||[]).map(n => `<a href="${zap(n)}">${ico}${esc(n)}</a>`).join("")}</div>${esc(k.endereco||"")}`;
 }
 
 function abrir(id){
   const i = porId[id]; if (!i) return;
   $("#folha").innerHTML = `
-    ${i.foto ? `<div class="ft"><img src="fotos/${i.foto}" alt="${esc(i.nome)}"></div>` : `<div class="ft sem">Pastel do Michel</div>`}
+    ${i.foto ? `<div class="ft"><img src="fotos/${i.foto}" alt="${esc(i.nome)}"></div>` : `<div class="ft sem">Michel do Pastel</div>`}
     <div class="tx"><div class="cat">${esc(i.cat)}</div><h3>${esc(i.nome)}</h3>${i.desc ? `<p>${esc(i.desc)}</p>` : ""}</div>
-    <div class="linha">${preco(i.preco)}<button class="btn" id="fechar">Ver cardápio</button></div>`;
+    <div class="linha"><span class="obs">Peça no balcão</span><button class="btn" id="fechar">Ver cardápio</button></div>`;
   $("#foco").classList.add("on");
   $("#fechar").onclick = fechar;
   document.querySelectorAll(".item.alvo").forEach(e => e.classList.remove("alvo"));
